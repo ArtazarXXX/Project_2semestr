@@ -1,0 +1,792 @@
+@import './base.scss';
+
+$main-procent: 7%;
+
+@mixin container($procent) {
+    margin: 0 $procent;
+}
+
+@mixin font-styles($weight, $size) {
+    font-weight: $weight;
+    font-size: $size;
+}
+
+$colors: (
+    background-lightgray: #F1F2F4,
+    text-gray: #727A82,
+    text-black: #151C22,
+    line-gray: #E5E5E5,
+    line-2-gray: #F1F2F4,
+    colors-for-circle_first: #B0C3C7,
+    colors-for-circle_second: #3B6392,
+    colors-for-circle_third: #BFC3C8,
+    colors-for-circle_fourth: #2D2E2E,
+    colors-for-circle_fifth: #ECECEC,
+    colors-for-circle_sixth: #4193DA,
+);
+
+header {
+    .menu {
+        background-color: #fff;
+        display: flex;
+        justify-content: space-between;
+        height: 50px;
+        align-items: center;
+        @include container(4%);
+        margin-top: 10px;
+        .burger {
+            &-cont {
+                width: 30%;
+            }
+            margin-top: -10px;
+            cursor: pointer;
+            width: 20px;
+            & span {
+                display: block;
+                width: 100%;
+                height: 2px;
+                border-radius: 20px;
+                background-color: map-get($map: $colors, $key: text-black);
+                position: relative;
+            }
+            & span::before {
+                display: block;
+                width: 100%;
+                height: 2px;
+                border-radius: 20px;
+                background-color: map-get($map: $colors, $key: text-black);
+                content: "";
+                position: absolute;
+                transition-duration: 800ms;
+                top: 5px;
+            }
+            & span::after {
+                display: block;
+                width: 100%;
+                height: 2px;
+                border-radius: 20px;
+                background-color: map-get($map: $colors, $key: text-black);
+                content: "";
+                position: absolute;
+                transition-duration: 800ms;
+                top: 10px;
+            }
+            &-open span {
+                animation-name: cross-up;
+                animation-duration: 500ms;
+                animation-fill-mode: forwards;
+                @keyframes cross-up {
+                    50% {
+                        transform: translateY(10px);
+                    }
+                
+                    100% {
+                        transform: translateY(5px) rotate(45deg);
+                    }
+                }
+                &::after {
+                    animation-name: cross-down;
+                    animation-duration: 500ms;
+                    animation-fill-mode: forwards;
+                    @keyframes cross-down {
+                        50% {
+                            transform: translateY(-20px);
+                        }
+
+                        100% {
+                            transform: translateY(-10px) rotate(-90deg);
+                        }
+                    }
+                }
+                &::before {
+                    display: none;
+                }
+            }
+            &-close span {
+                animation-name: up-cross;
+                animation-duration: 500ms;
+                animation-fill-mode: forwards;
+                @keyframes up-cross {
+                    from {
+                        transform: translateY(10px) rotate(45deg);
+                    }
+
+                    50% {
+                        transform: rotate(0deg) translateY(10px);
+                    }
+
+                    100% {
+                        transform: translateY(0px);
+                    }
+                }
+                &::after {
+                    animation-name: down-cross;
+                    animation-duration: 500ms;
+                    animation-fill-mode: forwards;
+                    @keyframes down-cross {
+                        from {
+                            transform: translateY(-20px) rotate(-90deg);
+                        }
+
+                        50% {
+                            transform: translateY(-20px);
+                        }
+
+                        to {
+                            transform: translateY(0px);
+                        }
+                    }
+                }
+                &::before {
+                    animation-name: middle-cross;
+                    animation-duration: 500ms;
+                    animation-fill-mode: forwards;
+                    @keyframes middle-cross {
+                        from,
+                        50% {
+                            opacity: 0;
+                            transform: translateY(-10px);
+                        }
+
+                        100% {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+        &-open {
+            position: fixed;
+            width: 100%;
+            background-color: #fff;
+            z-index: 100;
+            margin: 0;
+            .burger-cont {
+                margin: 0 4%;
+            }
+            .catalog {
+                display: block !important;
+                position: fixed;
+                width: 100%;
+                background-color: #fff;
+                z-index: 100;
+                margin-top: 520px;
+                height: 1000px;
+                padding: 0 4%;
+                text-align: center;
+                &__unit {
+                    padding: 10px 0;
+                }
+                &__link {
+                    @include font-styles(500, 20px);
+                }
+            }
+            .logo {
+                display: none;
+            }
+            .purchases {
+                &__unit {
+                    display: none;
+                }
+            }
+        }
+        .catalog {
+            display: none;
+            @include font-styles(500, 16px);
+            &__unit {
+                margin-right: 20px;
+                    &:hover .catalog__link::after {
+                    width: 100%;
+                    transition-duration: 0.3s;
+                }
+            }
+            &__link {
+                position: relative;
+                &::after {
+                    content: '';
+                    background-color: map-get($map: $colors, $key: text-black);
+                    width: 0%;
+                    height: 2px;
+                    position: absolute;
+                    top: 20px;
+                    left: 0;
+                }
+            }
+        }
+        .logo {
+            width: 30%;
+            @include font-styles(800, 24px);
+            text-align: center;
+        }
+        .purchases {
+            width: 30%;
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            justify-content: flex-end;
+            &__unit {
+                margin-left: 20px;
+                &:hover .purchases__link::after {
+                    width: 100%;
+                    transition-duration: 0.3s;
+                }
+                & svg {
+                    width: 17px;
+                    height: 16px;
+                }
+            }
+            &__link {
+                position: relative;
+                &::after {
+                    content: '';
+                    background-color: map-get($map: $colors, $key: text-black);
+                    width: 0%;
+                    height: 2px;
+                    position: absolute;
+                    top: 20px;
+                    left: 0;
+                }
+            }
+        }
+    }
+    .main {
+        background-color: #fff;
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: row;
+        @include container(4%);
+        .title {
+            .bread-crumb {
+                margin-top: 15px;
+                display: flex;
+                flex-direction: row;
+                &__unit {
+                    margin-right: 10px;
+                    @include font-styles(500, 18px);
+                    color: map-get($map: $colors, $key: text-gray);
+                    &:hover .bread-crumb__link::after {
+                        width: 100%;
+                        transition-duration: 0.3s;
+                    }
+                    &_delete {
+                        display: none;
+                    }
+                }
+                &__link {
+                    color: map-get($map: $colors, $key: text-gray);
+                    position: relative;
+                    &::after {
+                        content: '';
+                        background-color: map-get($map: $colors, $key: text-gray);
+                        width: 0%;
+                        height: 2px;
+                        position: absolute;
+                        top: 23px;
+                        left: 0;
+                    }
+                    &_active {
+                        color: map-get($map: $colors, $key: text-black);
+                        &::after {
+                            display: none;
+                        }
+                    }
+                }
+            }
+            &__name {
+                display: none;
+                @include font-styles(bold, 32px);
+            }
+        }
+        .philosophy {
+            display: none;
+            height: 270px;
+            width: 360px;
+            text-align: center;
+            background: url('../img/dia.jpg') bottom left no-repeat,
+                        url('../img/dia2.jpg') top right no-repeat;
+            background-size: 50%;
+            &__image {
+                height: 100%;
+            }
+        }
+    }
+}
+main {
+    @include container(4%);
+    margin-top: 25px;
+    .filter-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        .filter {
+            height: 50px;
+            width: 100%;
+            border: 2px solid map-get($map: $colors, $key: text-black);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            cursor: pointer;
+            &__name {
+                @include font-styles(500, 18px);
+            }
+            &-cont {
+                display: none;
+            }
+        }
+        &-open {
+            .filter {
+                &-cont {
+                    display: block;
+                    position: fixed;
+                    padding: 0 4% 400px 4%;
+                    top: 0;
+                    background-color: #fff;
+                    width: 100%;
+                    z-index: 100;
+                }
+                &-nav {
+                    height: 65px;
+                    align-items: center;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    border-bottom: 2px solid map-get($map: $colors, $key: line-gray);
+                    &__unit {
+                        &:hover .filter-nav__link::after {
+                            width: 100%;
+                            transition-duration: 0.3s;
+                        }
+                        &:active .filter-nav__link::after {
+                            width: 100%;
+                            transition-duration: 0.3s;
+                        }
+                        &:focus .filter-nav__link::after {
+                            width: 100%;
+                            transition-duration: 0.3s;
+                        }
+                    }
+                    &__link {
+                        position: relative;
+                        &::after {
+                            content: '';
+                            background-color: map-get($map: $colors, $key: text-black);
+                            width: 0%;
+                            height: 2px;
+                            position: absolute;
+                            top: 20px;
+                            left: 0;
+                        }
+                        @include font-styles(500, 14px);
+                        &_name {
+                            @include font-styles(bold, 18px);
+                        }
+                    }
+                }
+                &-characteristics {
+                    border-bottom: 2px solid map-get($map: $colors, $key: line-2-gray);
+                    
+                    &-price {
+                        .price-none {
+                            display: none;
+                        }
+                        &__range {
+                            appearance: none;
+                            width: 100%;
+                            border: 1px solid black;
+                            outline: none;
+                            height: 2px;
+                            &::-webkit-slider-thumb {
+                                -webkit-appearance: none;
+                                appearance: none;
+                                width: 16px;
+                                height: 16px;
+                                border-radius: 50%; 
+                                background: map-get($map: $colors, $key: text-black);
+                                cursor: pointer;
+                            }
+                        }
+                        &__description {
+                            @include font-styles(500, 14px);
+                        }
+                        &__price {
+                            @include font-styles(bold, 14px);
+                            margin-bottom: 20px;
+                        }
+                    }
+                    &-cont {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+                        height: 25px;
+                        margin: 20px 0;
+                        cursor: pointer;
+                    }
+                }
+                &__button {
+                    @include font-styles(600, 16px);
+                    display: block;
+                    height: 64px;
+                    width: 100%;
+                    margin-top: 150px;
+                    background-color: #151C22;
+                    color: white !important;
+                    text-align: center;
+                    line-height: 64px;
+                    &:hover {
+                        box-shadow: 
+                        0 0 0px 3px map-get($colors, background-lightgray),
+                        0 0 0px 4px rgb(0, 0, 0);
+                        transition-duration: 0.3s;
+                    }
+                    &-more768px {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+    .assortments {
+        margin-top: 30px;
+        width: 100%;
+        display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            .assortments-unit {
+                width: 40%;
+                margin-top: 20px;
+            }
+        &-none {
+            display: none;
+        }
+        &-unit {
+            width: 100%;
+            height: auto;
+            padding: 5px;
+            &__image {
+                width: 100%;
+            }
+            &__name {
+                @include font-styles(500, 16px);
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+            &__price {
+                @include font-styles(bold, 14px);
+            }
+            &:hover {
+                transform: scale(1.05);
+                box-shadow: 
+                0 0 0px 3px white,
+                0 0 0px 4px rgb(0, 0, 0);
+                transition-duration: 0.3s;
+            }
+        }
+    }
+    .all-products {
+        width: 100%;
+        height: 150px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        &__name {
+            @include font-styles(500, 16px);
+            color: map-get($map: $colors, $key: text-gray);
+        }
+    }
+    .no-products {
+        width: 100%;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+        &__name {
+            @include font-styles(600, 20px);
+            color: map-get($map: $colors, $key: text-gray);
+        }
+        &-show {
+            display: flex;
+        }
+    }
+}
+.footer {
+    background-color: #151C22;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 50px 5%;
+    .sections {
+        text-align: center;
+        margin-bottom: 40px;
+        width: 90%;
+        display: grid;
+        row-gap: 20px;
+        grid-template-areas: 
+            "nimes sitemap"
+            "shop service"
+            "delivery contacts";
+        &__name {
+            display: flex;
+            color: white;
+            grid-area: nimes;
+            @include font-styles(800, 24px);
+        }
+        &__unit {
+            &_shop {
+                display: flex;
+                color: white;
+                grid-area: shop;
+                &:hover {
+                    color: rgba(255, 255, 255, 0.623);
+                }
+            }
+            &_delivery {
+                display: flex;
+                color: white;
+                grid-area: delivery;
+                &:hover {
+                    color: rgba(255, 255, 255, 0.623);
+                }
+            }
+            &_service {
+                display: flex;
+                color: white;
+                grid-area: service;
+                &:hover {
+                    color: rgba(255, 255, 255, 0.623);
+                }
+            }
+            &_sitemap {
+                display: flex;
+                align-items: center;
+                color: white;
+                grid-area: sitemap;
+                &:hover {
+                    color: rgba(255, 255, 255, 0.623);
+                }
+            }
+            &_contacts {
+                display: flex;
+                color: white;
+                grid-area: contacts;
+                &:hover {
+                    color: rgba(255, 255, 255, 0.623);
+                }
+            }
+        }
+    }
+    .social-networks {
+        display: flex;
+        justify-content: space-between;
+        width: 170px;
+        &__unit {
+            &:hover svg path {
+                fill: rgba(255, 255, 255, 0.623);
+            }
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    header {
+        .menu {
+            margin-top: 0;
+            .burger-cont {
+                width: 0;
+                display: none;
+            }
+            .burger {
+                width: 0;
+                display: none;
+            }
+            .catalog {
+                position: static;
+                display: flex;
+                width: 30%;
+            }
+        }
+        .main {
+            background-color: map-get($map: $colors, $key: background-lightgray);
+            justify-content: center;
+            @include container(0%);
+            .title {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                .bread-crumb {
+                    margin-bottom: 40px;
+                    &__unit {
+                        &_delete {
+                            display: block !important;
+                        }
+                    }
+                }
+                &__name {
+                    display: block !important;
+                }
+            }
+            .philosophy {
+                display: block !important;
+            }
+        }
+    }
+    main {
+        .filter-container {
+            justify-content: flex-end;
+            .filter {
+                width: 250px;
+            }
+            &-open {
+                .filter {
+                    position: relative;
+                    &-cont {
+                        z-index: 100;
+                        position: absolute;
+                        width: 250px;
+                        padding: 0;
+                        top: 393px;
+                        border: 2px solid map-get($map: $colors, $key: text-black);
+                    }
+                    &-nav {
+                        display: none;
+                    }
+                    &-characteristics {
+                        &-price {
+                            padding: 0 4%;
+                        }
+                        &-color {
+                            padding: 0 4%;
+                            &-set {
+                                padding: 0 20% 0 0;
+                                margin-bottom: 0;
+                                &__unit {
+                                    margin-bottom: 20px;
+                                }
+                            }
+                        }
+                        &-collection {
+                            padding: 0 4%;
+                            &-set {
+                                padding: 0 10% 0 0;
+                                margin-bottom: 0;
+                                justify-content: flex-start;
+                                &__unit {
+                                    margin-bottom: 20px;
+                                }
+                            }
+                        }
+                        &-cont {
+                            margin: 12px 0;
+                            &__name {
+                                @include font-styles(500, 16px);
+                            }
+                        }
+                    }
+                    &__button {
+                        margin-top: 40px;
+                        &:hover {
+                            box-shadow: none;
+                            background-color: rgba(21, 28, 34, 0.9);
+                        }
+                        &:active {
+                            background-color: rgba(21, 28, 34, 0.9);
+                        }
+                        &-more768px {
+                            @include font-styles(600, 16px);
+                            display: block;
+                            height: 64px;
+                            width: 100%;
+                            background-color: white;
+                            color: map-get($map: $colors, $key: text-black) !important;
+                            text-align: center;
+                            line-height: 64px;
+                            &:hover .filter__button-more768px_link::after {
+                                width: 100%;
+                                transition-duration: 0.3s;
+                            }
+                            &_link {
+                                position: relative;
+                                &::after {
+                                    content: '';
+                                    background-color: map-get($map: $colors, $key: text-black);
+                                    width: 0%;
+                                    height: 2px;
+                                    position: absolute;
+                                    top: 20px;
+                                    left: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .assortments {
+            justify-content: space-around;
+            .assortments-unit {
+                width: 27%;
+            }
+        }
+        .no-products {
+            width: 100%;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            & h1 {
+                @include font-styles(700, 32px);
+                color: map-get($map: $colors, $key: text-gray);
+            }
+            &-show {
+                display: flex;
+            }
+        }
+        .load-more {
+            margin-top: 45px;
+        }
+    }
+    .footer {
+        align-items: center;
+        .sections {
+            width: 470px;
+            grid-template-areas:
+                ". . nimes . ."
+                "shop delivery service sitemap contacts";
+            row-gap: 20px;
+            &__name {
+                display: flex;
+                justify-content: center;
+            }
+            &__unit_shop {
+                display: flex;
+                justify-content: center;
+            }
+            &__unit_delivery {
+                display: flex;
+                justify-content: center;
+            }
+            &__unit_service {
+                display: flex;
+                justify-content: center;
+            }
+            &__unit_sitemap {
+                display: flex;
+                justify-content: center;
+            }
+            &__unit_contacts {
+                display: flex;
+                justify-content: center;
+            }
+        }
+    }
+}
+@media (min-width: 1100px) {
+    main {
+        .load-more {
+            margin-top: 60px;
+        }
+    }
+}
