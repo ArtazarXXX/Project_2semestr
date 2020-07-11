@@ -1,0 +1,236 @@
+@import './base.scss';
+
+$main-procent: 7%;
+
+@mixin container($procent) {
+    margin: 0 $procent;
+}
+
+@mixin font-styles($weight, $size) {
+    font-weight: $weight;
+    font-size: $size;
+}
+
+$colors: (
+    background-lightgray: #F1F2F4,
+    text-gray: #727A82,
+    text-black: #151C22,
+    line-gray: #E5E5E5
+);
+
+header {
+    background-color: map-get($colors, background-lightgray);
+    .logo {
+        background-color: white;
+        width: 100%;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include font-styles(800, 24px);
+    }
+}
+main {
+    background-color: map-get($map: $colors, $key: background-lightgray);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+    .bread-crumb {
+        margin-top: 15px;
+        display: flex;
+        flex-direction: row;
+        &__unit {
+            margin-right: 10px;
+            @include font-styles(500, 18px);
+            color: map-get($map: $colors, $key: text-gray);
+            &:hover .bread-crumb__link::after {
+                width: 100%;
+                transition-duration: 0.3s;
+            }
+        }
+        &__link {
+            color: map-get($map: $colors, $key: text-gray);
+            position: relative;
+            &::after {
+                content: '';
+                background-color: map-get($map: $colors, $key: text-gray);
+                width: 0%;
+                height: 2px;
+                position: absolute;
+                top: 23px;
+                left: 0;
+            }
+            &_active {
+                color: map-get($map: $colors, $key: text-black);
+                &::after {
+                    display: none;
+                }
+            }
+        }
+    }
+    .catalog {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        padding: 50px;
+        &-item {
+            display: block;
+            margin-bottom: 20px;
+            &-main {
+                z-index: 10;
+                position: absolute;
+                transform: translate(0px, 0px);
+                width: 250px;
+                height: 320px;
+                background-color: white;
+                border: 1px solid black;
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                padding: 13px 0 13px 0;
+                &__img {
+                    width: 90%;
+                }
+                &__name {
+                    font-weight: 500;
+                    font-size: 26px;
+                }
+                &:hover {
+                    transform: translate(-10px, -10px);
+                }
+            }
+            &__add {
+                z-index: 0;
+                position: relative;
+                // top: 10px;
+                // left: 10px;
+                width: 250px;
+                height: 320px;
+                background-color: white;
+                border: 1px solid black;
+            }
+        }
+    }
+}
+footer {
+    background-color: #151C22;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 50px 5%;
+    .sections {
+        text-align: center;
+        margin-bottom: 40px;
+        width: 90%;
+        display: grid;
+        row-gap: 20px;
+        grid-template-areas: 
+            "nimes sitemap"
+            "shop service"
+            "delivery contacts";
+        &__name {
+            display: flex;
+            color: white;
+            grid-area: nimes;
+        }
+        &__unit {
+            &_shop {
+                display: flex;
+                color: white;
+                grid-area: shop;
+                &:hover {
+                    color: rgba(255, 255, 255, 0.623);
+                }
+            }
+            &_delivery {
+                display: flex;
+                color: white;
+                grid-area: delivery;
+                &:hover {
+                    color: rgba(255, 255, 255, 0.623);
+                }
+            }
+            &_service {
+                display: flex;
+                color: white;
+                grid-area: service;
+                &:hover {
+                    color: rgba(255, 255, 255, 0.623);
+                }
+            }
+            &_sitemap {
+                display: flex;
+                align-items: center;
+                color: white;
+                grid-area: sitemap;
+                &:hover {
+                    color: rgba(255, 255, 255, 0.623);
+                }
+            }
+            &_contacts {
+                display: flex;
+                color: white;
+                grid-area: contacts;
+                &:hover {
+                    color: rgba(255, 255, 255, 0.623);
+                }
+            }
+        }
+    }
+    .social-networks {
+        display: flex;
+        justify-content: space-between;
+        width: 170px;
+        &__unit {
+            &:hover svg path {
+                fill: rgba(255, 255, 255, 0.623);
+            }
+        }
+    }
+}
+@media (min-width: 800px) {
+    main {
+        .catalog { 
+            flex-direction: row;
+        }
+    }
+    footer {
+        align-items: center;
+        .sections {
+            width: 470px;
+            grid-template-areas:
+                ". . nimes . ."
+                "shop delivery service sitemap contacts";
+            row-gap: 20px;
+            &__name {
+                display: flex;
+                justify-content: center;
+            }
+            &__unit_shop {
+                display: flex;
+                justify-content: center;
+            }
+            &__unit_delivery {
+                display: flex;
+                justify-content: center;
+            }
+            &__unit_service {
+                display: flex;
+                justify-content: center;
+            }
+            &__unit_sitemap {
+                display: flex;
+                justify-content: center;
+            }
+            &__unit_contacts {
+                display: flex;
+                justify-content: center;
+            }
+        }
+    }
+}

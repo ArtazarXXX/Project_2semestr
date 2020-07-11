@@ -1,0 +1,172 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Work Sans, sans-serif;
+  color: #000000; }
+
+ul {
+  list-style: none;
+  padding: 0; }
+
+p {
+  margin: 0; }
+
+h1, h2, h3 {
+  margin: 0; }
+
+a {
+  text-decoration: none; }
+
+header {
+  background-image: url(back.png); }
+  header .logo {
+    background-color: white;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 800;
+    font-size: 24px; }
+
+main {
+  background-image: url(back.png);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px; }
+  main .bread-crumb {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row; }
+    main .bread-crumb__unit {
+      margin-right: 10px;
+      font-weight: 500;
+      font-size: 18px;
+      color: #727A82; }
+      main .bread-crumb__unit:hover .bread-crumb__link::after {
+        width: 100%;
+        transition-duration: 0.3s; }
+    main .bread-crumb__link {
+      color: #727A82;
+      position: relative; }
+      main .bread-crumb__link::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background-color: #4e4b4b;
+        border-bottom: 1px solid rgb(247, 148, 112);
+        transition: 2s;
+      }
+      main .bread-crumb__link:hover::before {
+        width: 100%;
+      }
+      main .bread-crumb__link::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 25%;
+        width: 0;
+        height: 1px;
+        background-color: #4e4b4b;
+        transition: .5s;
+        transition-delay: .5s;
+      }
+  main .catalog {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 50px; }
+    main .catalog-item {
+      display: block;
+      margin-bottom: 20px; }
+      main .catalog-item-main {
+        z-index: 10;
+        position: absolute;
+        transform: translate(0px, 0px);
+        width: 250px;
+        height: 320px;
+        background-color: white;
+        border: 2px solid rgb(69, 255, 246);
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: 13px 0 13px 0; }
+        main .catalog-item-main__img {
+          width: 90%; }
+        main .catalog-item-main__name {
+          font-size: 16px;
+          font-weight: bold;
+ }
+        main .catalog-item-main:hover {
+          transform: translate(10px, 20px); }
+      main .catalog-item__add {
+        z-index: 0;
+        position: relative;
+        width: 250px;
+        height: 320px;
+        background-color: rgb(247, 148, 112);
+        border: 2px solid rgb(69, 255, 246); }
+
+footer {
+  background-image: url(back.png);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 50px 5%; }
+  footer .sections {
+    text-align: center;
+    margin-bottom: 40px;
+    width: 90%;
+    display: grid;
+    row-gap: 20px;
+    grid-template-areas: "nimes sitemap" "shop service" "delivery contacts"; }
+    footer .sections__name {
+      display: flex;
+      color: black;
+      grid-area: nimes;
+      font-weight: 800;
+      font-size: 24px; }
+  footer .social-networks {
+    display: flex;
+    justify-content: space-between;
+    width: 170px; }
+    footer .social-networks__unit:hover svg path {
+      fill: rgba(255, 255, 255, 0.623); }
+
+@media (min-width: 800px) {
+  main .catalog {
+    flex-direction: row; }
+
+  footer {
+    align-items: center; }
+    footer .sections {
+      width: 470px;
+      grid-template-areas: ". . nimes . ." "shop delivery service sitemap contacts";
+      row-gap: 20px; }
+      footer .sections__name {
+        display: flex;
+        justify-content: center; }
+      footer .sections__unit_shop {
+        display: flex;
+        justify-content: center; }
+      footer .sections__unit_delivery {
+        display: flex;
+        justify-content: center; }
+      footer .sections__unit_service {
+        display: flex;
+        justify-content: center; }
+      footer .sections__unit_sitemap {
+        display: flex;
+        justify-content: center; }
+      footer .sections__unit_contacts {
+        display: flex;
+        justify-content: center; } }
